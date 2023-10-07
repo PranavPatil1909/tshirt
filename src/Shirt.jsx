@@ -1,43 +1,36 @@
-
+import {
+    useGLTF,
+    useTexture,
+    Decal,
+    PerspectiveCamera
+} from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
 
 import { useSnapshot } from 'valtio'
 import { state } from './store'
-import { useFrame } from '@react-three/fiber'
-import {
-    useGLTF,
-
-    useTexture,
-    Decal
-} from '@react-three/drei'
 import { easing } from 'maath'
-export function Model(props) {
-    const snap = useSnapshot(state)
-    const texture = useTexture(`/${snap.selectedDecal}.png`)
-    const { nodes, materials } = useGLTF('./models/t_shirt_b.glb')
+
+
+export function Shirt(props) {
+    const snap = useSnapshot(state);
+
+    const texture = useTexture(`/${snap.selectedDecal}.png`);
+    const { nodes, materials } = useGLTF('/Duck.glb')
     useFrame((state, delta) =>
-        easing.dampC(materials.lambert1.color, snap.selectedColor, 0.25, delta)
-    )
+        easing.dampC(materials['blinn3-fx'].color, snap.selectedColor, 0.25, delta)
+    );
     return (
+        <group {...props} dispose={null}>
+            <group scale={0.01}>
+                <PerspectiveCamera makeDefault={false} far={10000} near={1} fov={37.849} position={[400.113, 463.264, -431.078]} rotation={[-2.314, 0.566, 2.614]} />
+                <mesh dispose={null}
+                    geometry={nodes.LOD3spShape.geometry} material={materials['blinn3-fx']}
+                    material-roughness={1}
+                />
+            </group>
+        </group>)
 
-        <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.T_Shirt_Male.geometry} material={materials.lambert1}
-            material-roughness={1}
-            {...props}
-            dispose={null}
-        >
-            <Decal
-                position={[0.1, 0.49, 0.11]}
-                rotation={[0, 0.1, 0]}
-                scale={0.1}
-                opacity={0.9}
-                map={texture}
-                anisotropy={16} />
-        </mesh>
-
-
-    )
-}
-
-useGLTF.preload('./models/t_shirt_b.glb')
+} useGLTF.preload(
+    '/Duck.glb'
+);
+['/react.png', '/three2.png', '/pmndrs.png'].forEach(useTexture.preload);

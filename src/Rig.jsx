@@ -12,7 +12,7 @@ export function CameraRig({ children }) {
     useFrame((state, delta) => {
         easing.damp3(
             state.camera.position,
-            [snap.intro ? -state.viewport.width / 4 : 0, 0, 2],
+            [snap.intro ? -state.viewport.width / 3 : 0, 0, 5],
             0.25,
             delta
         )

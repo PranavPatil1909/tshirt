@@ -7,9 +7,10 @@ import {
 } from 'react-icons/ai'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
+
 import { motion, AnimatePresence } from 'framer-motion'
 
-export  function Overlay() {
+export function Overlay() {
   const snap = useSnapshot(state)
 
   const transition = { type: 'spring', duration: 0.8 }
