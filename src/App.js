@@ -2,14 +2,14 @@
 import { Canvas } from '@react-three/fiber'
 // import { easing } from 'maath'
 import { Shirt } from './Shirt'
-import { Backdrop } from './Shadows'
+import { Shadows } from './Shadows'
 import { CameraRig } from './Rig'
 
 import { Environment, Center } from '@react-three/drei'
 // import { useSnapshot } from 'valtio'
 // import { state } from './store'
 
-export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
+export const App = ({ position = [0, 0, 2.3], fov = 25 }) => (
   <Canvas
     shadows
     gl={{ preserveDrawingBuffer: true }}
@@ -20,7 +20,7 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
     <Environment preset="city" />
 
     <CameraRig>
-      <Backdrop />
+      <Shadows />
       <Center>
         <Shirt />
       </Center>
