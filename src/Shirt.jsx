@@ -15,7 +15,7 @@ export function Shirt(props) {
     const snap = useSnapshot(state);
 
     const texture = useTexture(`/${snap.selectedDecal}.png`);
-    const { nodes, materials } = useGLTF('/Duck.glb')
+    const { nodes, materials } = useGLTF('https://models-kosoku-3d.s3.ap-south-1.amazonaws.com/Duck.glb')
     useFrame((state, delta) =>
         easing.dampC(materials['blinn3-fx'].color, snap.selectedColor, 0.25, delta)
     );
@@ -31,6 +31,6 @@ export function Shirt(props) {
         </group>)
 
 } useGLTF.preload(
-    '/Duck.glb'
+    'https://models-kosoku-3d.s3.ap-south-1.amazonaws.com/Duck.glb'
 );
 ['/react.png', '/three2.png', '/pmndrs.png'].forEach(useTexture.preload);
